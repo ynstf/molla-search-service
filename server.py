@@ -3,6 +3,7 @@ import requests
 import json
 
 app = Flask(__name__)
+product_host = 'product'
 
 #to test the server run
 @app.route('/', methods=['GET'])
@@ -13,7 +14,7 @@ def home():
 @app.route('/shearch', methods=['GET'])
 def show_products():
     # get all products
-    products = json.loads(requests.get("http://127.0.0.1:5555/showproducts").content.decode('utf-8'))
+    products = json.loads(requests.get(f"http://{product_host}:5555/showproducts").content.decode('utf-8'))
     # Access the 'results' key in the products dictionary
     search = request.args.get('search', '')
     products_list = products.get('results', [])
